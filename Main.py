@@ -1,9 +1,11 @@
-import fnmatch
+﻿import fnmatch
 import requests
 import re
+import os
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 from lxml import html
+
 
 while True:
     url = "https://en.oxforddictionaries.com/definition/"
@@ -32,6 +34,7 @@ while True:
 
     contents = soup.findAll(class_="semb")
     definitions = []
+    takeaway = 0
     for f in range(len(contents)):
         body = contents[f].select(".iteration, .subsenseIteration, .ind")
         x = 1
@@ -43,11 +46,14 @@ while True:
                 construct = ""
             else: construct += str(item.get_text()) + " - "
             x += 1
-        definitions.append("\n║")
+        definitions.append("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+        takeaway += 1
 
     word_bank = []
     for item in definitions:
         if (item != ""):
             word_bank.append(item)
 
-    print("╔══════════════════════════════════════════════════════════════════\n║ Word: " + str(urlin) + "\n║ Item count: " + str(len(word_bank)) + "\n╠══════════════════════════════════════════════════════════════════\n║ " + '\n║ '.join(word_bank) + "\n╚══════════════════════════════════════════════════════════════════")
+    print("╔══════════════════════════════════════════════════════════════════\n║ Word: " + str(urlin) + "\n║ Item count: " + str(len(word_bank)-takeaway) + "\n╠══════════════════════════════════════════════════════════════════\n║ " + '\n║ '.join(word_bank) + "\n╚══════════════════════════════════════════════════════════════════")
+    input("Press ENTER to Continue...")
+    os.system('cls')
