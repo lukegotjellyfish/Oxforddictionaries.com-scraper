@@ -8,7 +8,7 @@ from lxml import html
 
 
 while True:
-    url = "https://www.lexico.com/en/definition/"
+    url = "https://en.oxforddictionaries.com/definition/"
     urlin = input("Enter word to find:\n- ").strip().lower().replace(" ", "")
     if (len(urlin) == 0): continue
 
@@ -46,6 +46,7 @@ while True:
                 construct = ""
             else: construct += str(item.get_text()) + " - "
             x += 1
+        definitions.append("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
         takeaway += 1
 
     word_bank = []

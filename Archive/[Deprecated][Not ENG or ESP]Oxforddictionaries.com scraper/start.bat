@@ -1,0 +1,2 @@
+CALL "Main.py"
+PAUSE
